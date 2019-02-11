@@ -1,4 +1,4 @@
-package com.example.workerapp;
+package com.example.moversapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
