@@ -12,7 +12,11 @@ $> flutter run
 - Firebase Cloud FireStore
 
 #### Dependancies
-###### iOS Cocoa Pods
+###### Flutter/Dart
 ```
-pod 'Firebase/Core'
+flutter packages get
+```
+###### iOS
+```
+pod install
 ```

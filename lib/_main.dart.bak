@@ -41,8 +41,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           widget.title,
           style: TextStyle(color: Colors.cyan[900]),
         ),
+        centerTitle: true,
       ),
       body: Container(
+        stream: Firestore.instance.collection('flutter_data').snapshots(),
+        builder: (BuildContext context, AsyncSnapShot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) return CircularProgressIndicator();
+          return FirestoreListView(documents: snapshot.data.documents);
+        }, // StreamBuilder
         decoration: BoxDecoration(
             image: DecorationImage(
           image: NetworkImage(
@@ -124,6 +130,40 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
           ],
         ),
       ),
+    );
+  }
+}
+
+class FirestoreListView extends StatelessWidget {
+  final List<DocumentSnapshot> documents;
+
+  FirestoreListView({this.documents});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: documents.length,
+      itemExtent: 90.0,
+      itemBuilder: (BuildContext context, int index) {
+        String title = documents[index].data['title'].toString();
+
+        return ListTile(
+          title: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5.0),
+              border: Border.all(color: Colors.black),
+            ),
+            padding: EdgeInsert.all(5.0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(title),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
