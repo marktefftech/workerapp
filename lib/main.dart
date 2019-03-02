@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:worker_app/PmLogin.dart';
-import 'package:worker_app/SignUp.dart';
-import 'package:worker_app/LaborLogin.dart';
 
 import 'src/homepage.dart';
 
