@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: 24.0),
                 ButtonTheme(
                   height: 40.0,
                   child: RaisedButton(
@@ -77,11 +77,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
                 ),
-                SizedBox(height: 94),
+                SizedBox(height: 94.0),
                 Text("Don't have an account ?",
                   style: TextStyle(color: Colors.white), 
                 ),
-                SizedBox(height: 24),
+                SizedBox(height: 24.0),
                 ButtonTheme(
                   height: 40.0,
                   child: RaisedButton(

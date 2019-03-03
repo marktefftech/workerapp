@@ -1,6 +1,7 @@
-package com.example.moversapp;
+package com.workerapp.newworkerapp;
 
 import android.os.Bundle;
+
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
