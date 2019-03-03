@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workerapp/src/datepickerfield.dart';
 
 class PmLogin extends StatefulWidget {
   @override
@@ -7,6 +8,12 @@ class PmLogin extends StatefulWidget {
 
 class PmLoginState extends State<PmLogin> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  DateTime _fromDate = DateTime.now();
+  TimeOfDay _fromTime = const TimeOfDay(hour: 7, minute: 28);
+  DateTime _toDate = DateTime.now();
+  TimeOfDay _toTime = const TimeOfDay(hour: 7, minute: 28);
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -55,7 +62,37 @@ class PmLoginState extends State<PmLogin> {
                   labelText: 'Number of Installers Needed'
                 ),
               ),
-              
+              new DateTimePicker(
+                labelText: 'From',
+                selectedDate: _fromDate,
+                selectedTime: _fromTime,
+                selectDate: (DateTime date) {
+                  setState(() {
+                    _fromDate = date;
+                  });
+                },
+                selectTime: (TimeOfDay time) {
+                  setState(() {
+                    _fromTime = time;
+                  });
+                },
+              )
+              ,new DateTimePicker(
+                labelText: 'To',
+                selectedDate: _toDate,
+                selectedTime: _toTime,
+                selectDate: (DateTime date) {
+                  setState(() {
+                    _fromDate = date;
+                  });
+                },
+                selectTime: (TimeOfDay time) {
+                  setState(() {
+                    _fromTime = time;
+                  });
+                },
+              )
+              ,
               new TextFormField(
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
@@ -84,4 +121,6 @@ class PmLoginState extends State<PmLogin> {
       ),
     );
   }
+
+
 }
