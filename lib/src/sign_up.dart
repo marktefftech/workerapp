@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
   @override
-  SignUpState createState() => new SignUpState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class SignUpState extends State<SignUp> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);

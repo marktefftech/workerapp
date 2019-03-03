@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class PmLogin extends StatefulWidget {
   @override
-  PmLoginState createState() => new PmLoginState();
+  _PmLoginState createState() => _PmLoginState();
 }
 
-class PmLoginState extends State<PmLogin> {
+class _PmLoginState extends State<PmLogin> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -63,18 +63,22 @@ class PmLoginState extends State<PmLogin> {
                   labelText: 'Scope of Work'
                 ),
               ),
-              new Container(
-                child: new RaisedButton(
-                  child: new Text(
+              Container(
+                child: RaisedButton(
+                  child: Text(
                     'Submit',
                     style: new TextStyle(
-                      color: Colors.white
+                      color: Colors.white 
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // take data from form
+                    // send post request
+                    // 
+                  },
                   color: Colors.deepOrange,
                 ),
-                margin: new EdgeInsets.only(
+                margin: EdgeInsets.only(
                   top: 20.0
                 ),
               )

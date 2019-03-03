@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class LaborLogin extends StatefulWidget {
   @override
-  LaborLoginState createState() => new LaborLoginState();
+  _LaborLoginState createState() => _LaborLoginState();
 }
 
-class LaborLoginState extends State<LaborLogin> {
+class _LaborLoginState extends State<LaborLogin> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
