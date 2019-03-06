@@ -6,7 +6,27 @@ class PmLogin extends StatefulWidget {
 }
 
 class _PmLoginState extends State<PmLogin> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
+  final workOrderController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    workOrderController.addListener(_printLatestValue());
+  }
+
+  // clean up controller when the Widget is removed from the Widget tree
+  @override
+  void dispose() {
+    workOrderController.dispose();
+    super.dispose();
+  }
+
+  _printLatestValue() {
+    String currentText = workOrderController.text;
+    print("Form text field: $text");
+  }
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -21,19 +41,21 @@ class _PmLoginState extends State<PmLogin> {
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:  Form(
-          key: this._formKey,
+          key: formKey,
           child: ListView(
             children: <Widget>[
-              new TextFormField(
+              TextFormField(
+                controller: workOrderController,
                 keyboardType: TextInputType.emailAddress, // Use email input type for emails.
-                decoration: new InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'name@example.com',
-                  labelText: "Client's Contact"
+                  labelText: "Client's Contact Email",
                 )
               ),
               new TextFormField(
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
+                  hintText: 'mm/dd/yyyy',
                   labelText: 'Date'
                 ),
               ),
