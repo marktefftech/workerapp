@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:worker_app/src/project_list.dart';
 
 import 'src/homepage.dart';
 
@@ -13,8 +14,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.cyan,
       ),
-      home: HomePage(
-        title: "Movers App POC",
+      home: Projectlist(
       ),
     );
   }
