@@ -33,7 +33,7 @@ class ProjectlistState extends State<Projectlist> {
             }
             return Scaffold(
               appBar: AppBar(
-                title: Text('Startup Name Generator'),
+                title: Text('Startup Name Generator 2.0'),
               ),
               body: _buildSuggestions(),
             );
