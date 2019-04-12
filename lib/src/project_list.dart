@@ -16,6 +16,7 @@ class ProjectlistState extends State<Projectlist> {
 
   @override
   Widget build(BuildContext context) {
+    _suggestions.removeRange(0, _suggestions.length);
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection("projectlists").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
