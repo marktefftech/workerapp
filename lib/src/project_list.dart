@@ -33,7 +33,7 @@ class ProjectlistState extends State<Projectlist> {
             }
             return Scaffold(
               appBar: AppBar(
-                title: Text('Startup Name Generator'),
+                title: Text('Startup Name Generator 2.0'),
               ),
               body: _buildSuggestions(),
             );
@@ -55,7 +55,10 @@ class ProjectlistState extends State<Projectlist> {
 
   Widget _buildRow(String pair) {
     return new ListTile(
+      leading: new Icon(Icons.event_seat),
       title: new Text(pair, style: _biggerFont),
+      subtitle: new Text('Project Date'),
+      onTap: (){},
     );
   }
 }
