@@ -56,7 +56,7 @@ class ProjectlistState extends State<Projectlist> {
 
   Widget _buildRow(Client clientOrder) {
     return new ListTile(
-      leading: new Icon(Icons.event_seat),
+      leading: clientOrder.getIcon(),
       title: new Text(clientOrder.name, style: _biggerFont),
       subtitle: new Text(clientOrder.getDateAsString()),
       onTap: (){},
@@ -69,6 +69,19 @@ class Client {
   Timestamp date;
   int installers;
   int movers;
+  String iconUrl;
+
+  dynamic getIcon() {
+    if(this.iconUrl == null) {
+       return new Icon(Icons.event_seat);
+    }
+    return Container(
+          child: Center(
+            child: Image.network(this.iconUrl)),
+          width: 35,
+          height: 35,
+        );
+  }
 
   String getDateAsString() {
     if(this.date == null) {
@@ -88,6 +101,11 @@ class Client {
     if (data.containsKey("date")) {
       date = data["date"];
     }
+
+    if (data.containsKey("iconUrl")) {
+      iconUrl = data["iconUrl"];
+    }
+
     installers = data["installers"];
     movers = data["movers"];
   }
