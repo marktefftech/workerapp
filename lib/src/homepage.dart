@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'labor_login.dart';
 import 'pm_login.dart';
+import 'project_list.dart';
 import 'sign_up.dart';
 
 class HomePage extends StatefulWidget {
@@ -75,6 +76,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       },
                       shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
+                ),
+                SizedBox(height: 24),
+                ButtonTheme(
+                  height: 40.0,
+                  child: RaisedButton(
+                      child: const Text(
+                          'Projects',
+                          style: TextStyle(fontSize: 16.0),
+                      ),
+                      color: Colors.white,
+                      elevation: 4.0,
+                      splashColor: Colors.blue,
+                      onPressed: () {
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => ProjectList()),
+                          );
+                      },
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular (30.0))),
                 ),
                 SizedBox(height: 94),
                 Text("Don't have an account ?",

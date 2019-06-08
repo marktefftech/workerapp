@@ -3,14 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Projectlist extends StatefulWidget {
+class ProjectList extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new ProjectlistState();
+    return new ProjectListState();
   }
 }
 
-class ProjectlistState extends State<Projectlist> {
+class ProjectListState extends State<ProjectList> {
   final _clients = <Client>[];
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
@@ -85,7 +85,7 @@ class Client {
 
   String getDateAsString() {
     if(this.date == null) {
-      return "Missing";
+      return "Date unspecified";
     }
     Timestamp timestamp = this.date;
     var d = new DateFormat.yMMMd().format(

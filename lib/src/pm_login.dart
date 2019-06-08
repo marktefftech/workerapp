@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class PmLogin extends StatefulWidget {
   @override
-  PmLoginState createState() => new PmLoginState();
+  _PmLoginState createState() => _PmLoginState();
 }
 
-class PmLoginState extends State<PmLogin> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _PmLoginState extends State<PmLogin> {
+  final _formKey = GlobalKey<FormState>();
+  String _email;
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    //ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -21,57 +22,60 @@ class PmLoginState extends State<PmLogin> {
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:  Form(
-          key: this._formKey,
+          key: _formKey,
           child: ListView(
             children: <Widget>[
-              new TextFormField(
-                keyboardType: TextInputType.emailAddress, // Use email input type for emails.
-                decoration: new InputDecoration(
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
                   hintText: 'name@example.com',
-                  labelText: "Client's Contact"
-                )
+                  labelText: "Client Email",
+                ),
+                validator: _validateEmail,
+                onSaved: (input) => _email = input,
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
                   labelText: 'Date'
                 ),
+
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Location'
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Number of Movers Needed'
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Number of Installers Needed'
                 ),
               ),
-              
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: InputDecoration(
                   labelText: 'Scope of Work'
                 ),
               ),
-              new Container(
-                child: new RaisedButton(
-                  child: new Text(
+              Container(
+                child: RaisedButton(
+                  onPressed: _submit,
+                  child: Text(
                     'Submit',
-                    style: new TextStyle(
+                    style: TextStyle(
                       color: Colors.white
                     ),
                   ),
-                  onPressed: () {},
+                  
                   color: Colors.deepOrange,
                 ),
                 margin: new EdgeInsets.only(
@@ -84,4 +88,23 @@ class PmLoginState extends State<PmLogin> {
       ),
     );
   }
+
+  void _submit() {
+    if (_formKey.currentState.validate()) {
+      print('INSIDE _formKey.currentState.validate()');
+      print(_formKey.currentState);
+      _formKey.currentState.save();
+    }
+  }
+
+  String _validateEmail(String value) {
+    if(value == '') {
+      return 'Email must not be blank';
+    } else if (!value.contains('@')) {
+      return 'Email must contain an \'@\' symbol';
+    }
+    return null;
+  }
 }
+
+
