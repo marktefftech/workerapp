@@ -16,6 +16,10 @@ ___Hustle Up ... Let's Go!___
 
 ---
 
+### Github Repo
+
+The repo is located at https://github.com/marktefftech/workerapp.
+
 ### Launch Your Mobile Emulator
 
 + In a new terminal, list your available emulators:

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PmLogin extends StatefulWidget {
@@ -7,15 +8,18 @@ class PmLogin extends StatefulWidget {
 
 class _PmLoginState extends State<PmLogin> {
   final _formKey = GlobalKey<FormState>();
-  String _email;
+  String _name, _email;
   @override
   Widget build(BuildContext context) {
     //ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Project Manager Page Title",
-          style: TextStyle(color: Colors.cyan[900]),
+          "New Project Submission",
+          style: TextStyle(
+            color: Colors.cyan[900],
+            fontWeight: FontWeight.bold
+          ),
         ),
       ),
       backgroundColor: Colors.grey[300],
@@ -26,10 +30,18 @@ class _PmLoginState extends State<PmLogin> {
           child: ListView(
             children: <Widget>[
               TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: "Client Name",
+                ),
+                validator: _validateName,
+                onSaved: (input) => _name = input,
+              ),
+              TextFormField(
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: 'name@example.com',
-                  labelText: "Client Email",
+                  labelText: "Email",
                 ),
                 validator: _validateEmail,
                 onSaved: (input) => _email = input,
@@ -89,17 +101,33 @@ class _PmLoginState extends State<PmLogin> {
     );
   }
 
-  void _submit() {
+void _submit() {
     if (_formKey.currentState.validate()) {
       print('INSIDE _formKey.currentState.validate()');
-      print(_formKey.currentState);
       _formKey.currentState.save();
+      Firestore.instance
+        .collection('projectlists')
+        .add({
+          "name": _name,
+          "email": _email
+        })
+        .then((result) => {
+          print('Added new document to Firestore')
+        })
+        .catchError((error) => print(error));
     }
+  }
+
+  String _validateName(String value) {
+    if(value == '') {
+      return 'Name must be entered';
+    }
+    return null;
   }
 
   String _validateEmail(String value) {
     if(value == '') {
-      return 'Email must not be blank';
+      return 'Email must be entered';
     } else if (!value.contains('@')) {
       return 'Email must contain an \'@\' symbol';
     }
