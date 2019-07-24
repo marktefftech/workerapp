@@ -1,77 +1,93 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class PmLogin extends StatefulWidget {
   @override
-  PmLoginState createState() => new PmLoginState();
+  _PmLoginState createState() => _PmLoginState();
 }
 
-class PmLoginState extends State<PmLogin> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _PmLoginState extends State<PmLogin> {
+  final _formKey = GlobalKey<FormState>();
+  String _name, _email;
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
+    //ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Project Manager Page Title",
-          style: TextStyle(color: Colors.cyan[900]),
+          "New Project Submission",
+          style: TextStyle(
+            color: Colors.cyan[900],
+            fontWeight: FontWeight.bold
+          ),
         ),
       ),
       backgroundColor: Colors.grey[300],
       body: Container(
         padding: EdgeInsets.all(20.0),
         child:  Form(
-          key: this._formKey,
+          key: _formKey,
           child: ListView(
             children: <Widget>[
-              new TextFormField(
-                keyboardType: TextInputType.emailAddress, // Use email input type for emails.
-                decoration: new InputDecoration(
-                  hintText: 'name@example.com',
-                  labelText: "Client's Contact"
-                )
+              TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(
+                  labelText: "Client Name",
+                ),
+                validator: _validateName,
+                onSaved: (input) => _name = input,
               ),
-              new TextFormField(
+              TextFormField(
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  hintText: 'name@example.com',
+                  labelText: "Email",
+                ),
+                validator: _validateEmail,
+                onSaved: (input) => _email = input,
+              ),
+              TextFormField(
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
                   labelText: 'Date'
                 ),
+
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                   labelText: 'Location'
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Number of Movers Needed'
                 ),
               ),
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Number of Installers Needed'
                 ),
               ),
-              
-              new TextFormField(
+              TextFormField(
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: InputDecoration(
                   labelText: 'Scope of Work'
                 ),
               ),
-              new Container(
-                child: new RaisedButton(
-                  child: new Text(
+              Container(
+                child: RaisedButton(
+                  onPressed: _submit,
+                  child: Text(
                     'Submit',
-                    style: new TextStyle(
+                    style: TextStyle(
                       color: Colors.white
                     ),
                   ),
-                  onPressed: () {},
+                  
                   color: Colors.deepOrange,
                 ),
                 margin: new EdgeInsets.only(
@@ -84,4 +100,39 @@ class PmLoginState extends State<PmLogin> {
       ),
     );
   }
+
+void _submit() {
+    if (_formKey.currentState.validate()) {
+      print('INSIDE _formKey.currentState.validate()');
+      _formKey.currentState.save();
+      Firestore.instance
+        .collection('projectlists')
+        .add({
+          "name": _name,
+          "email": _email
+        })
+        .then((result) => {
+          print('Added new document to Firestore')
+        })
+        .catchError((error) => print(error));
+    }
+  }
+
+  String _validateName(String value) {
+    if(value == '') {
+      return 'Name must be entered';
+    }
+    return null;
+  }
+
+  String _validateEmail(String value) {
+    if(value == '') {
+      return 'Email must be entered';
+    } else if (!value.contains('@')) {
+      return 'Email must contain an \'@\' symbol';
+    }
+    return null;
+  }
 }
+
+

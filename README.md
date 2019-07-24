@@ -4,7 +4,7 @@ Moving your office?  Like _yesterday_?
 
     Find the right moving talent by date, location, scope, and expertise.
 
-Need a great _$ide hu$tle_?
+Need a great _Side Hu$tle_?
 
     Find the most convenient and lucrative moving project in just a few clicks!
 
@@ -15,6 +15,10 @@ In iOS and Android.
 ___Hustle Up ... Let's Go!___
 
 ---
+
+### Github Repo
+
+The repo is located at https://github.com/marktefftech/workerapp.
 
 ### Launch Your Mobile Emulator
 
@@ -33,7 +37,7 @@ ___Hustle Up ... Let's Go!___
 + In a new terminal, run the following commands:
 ```
     $> flutter packages get
-    $> futter clean
+    $> flutter clean
     $> flutter run
 ```
 
