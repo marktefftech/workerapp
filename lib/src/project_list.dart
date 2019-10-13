@@ -20,10 +20,10 @@ class ProjectListState extends State<ProjectList> {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance.collection("projectlists").snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) return new Text('${snapshot.error}');
+        if (snapshot.hasError) return Text('${snapshot.error}');
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return new Center(child: new LinearProgressIndicator());
+            return Center(child: LinearProgressIndicator());
           default:
             for (int i = 0; i <= snapshot.data.documents.length - 1; i++) {
            
@@ -95,8 +95,15 @@ class Client {
   }
 
   validateClientData(Map<String, dynamic> data) {
+    print(data);
+    if(data == null) {
+      print('There is no data for this record.');
+    }
     if (data.containsKey("clientname")) {
       name = data["clientname"];
+    }
+    else {
+      name = "No name is present";
     }
     if (data.containsKey("date")) {
       date = data["date"];
@@ -106,7 +113,7 @@ class Client {
       iconUrl = data["iconUrl"];
     }
 
-    installers = data["installers"];
-    movers = data["movers"];
+    // installers = data["installers"];
+    // movers = data["movers"];
   }
 }
