@@ -27,10 +27,17 @@ class CityMap extends StatelessWidget {
             target: _center,
             zoom: 11.0,
           ),
+          markers: {
+            Marker(
+              markerId: MarkerId('testMarker'),
+              position: LatLng(30.265433, -97.733376),
+              infoWindow: InfoWindow(
+                title: 'Info Window Title'
+              ),
+            )
+          },
         ),
       ),
     );
   }
-  
-
 }
