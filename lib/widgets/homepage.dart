@@ -3,6 +3,7 @@ import 'labor_login.dart';
 import 'pm_login.dart';
 import 'project_list.dart';
 import 'sign_up.dart';
+import 'city_map.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -116,6 +117,26 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SignUp()),
+                        );
+                      },
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(30.0))),
+                ),
+                SizedBox(height: 24),
+                ButtonTheme(
+                  height: 40.0,
+                  child: RaisedButton(
+                      child: const Text(
+                        'Austin Map',
+                        style: TextStyle(fontSize: 16.0),
+                      ),
+                      color: Colors.white,
+                      elevation: 4.0,
+                      splashColor: Colors.blue,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CityMap()),
                         );
                       },
                       shape: new RoundedRectangleBorder(
